@@ -1,14 +1,11 @@
 package com.mary.spider;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
+//import java.util.regex.Matcher;
+//import java.util.regex.Pattern;
+import java.util.LinkedList;
+import java.util.List;
 
 
 /****************************************************************************
@@ -25,28 +22,37 @@ import javax.net.ssl.SSLSocketFactory;
  *  
  ****************************************************************************/
 
+/**
+ * @author mary
+ *
+ */
 public class Login {
+	List<String> cookies = new LinkedList<>();
 	
-	
-	public static void main(String[] args) throws IOException  {
-		System.out.println("start");
-		Login login = new Login();
-		login.getPost();
-	}
-	
-	public StringBuilder getPost() throws IOException {
+	/**
+	 * Method getPost creates builds the post request and initializes a connection - sends header info onto
+	 * getCookies
+	 * @return html
+	 * @throws IOException
+	 */
+	public StringBuilder sendPost() throws IOException {
 		StringBuilder html = new StringBuilder();
-		
-		String request = "POST " + "/admintool" + " HTTP/1.1\r\n" +
-                "Host: " + "smt-stage.qa.siliconmtn.com" + ":" + 443 + "\r\n" + "Content-Type: application/x-www-form-urlencoded" + "\r\n" + "Content-Length: " + 97 + "\r\n"
-                + "\r\n" + "requestType=reqBuild&pmid=ADMIN_LOGIN&emailAddress=" +System.getenv("email")+ "&password="+ System.getenv("pword")+ "&l=" + "\r\n" + "\r\n";
+		//creates post request
+		String request = "POST " + "/admintool" + " HTTP/1.1\r\n" + "Host: " + "smt-stage.qa.siliconmtn.com" + ":" + 443 + "\r\n" 
+						+ "Content-Type: application/x-www-form-urlencoded" + "\r\n" + "Content-Length: " + 97 + "\r\n"
+						+ "\r\n" + "requestType=reqBuild&pmid=ADMIN_LOGIN&emailAddress=" +System.getenv("email")
+						+ "&password="+ System.getenv("password")+ "&l=" + "\r\n" + "\r\n";
 		Connection connect = new Connection();
 		html = connect.getConnect("smt-stage.qa.siliconmtn.com", 443, request);
 		System.out.println(html);
+		//getCookies(html);
 		return html;
 	} 
 	
-	public void getCookies() throws IOException {
-		StringBuilder html = getPost();
-	}
+	//here for testing purposes
+	//public static void main(String[] args) throws IOException  {
+		//System.out.println("start");
+		//Login login = new Login();
+		//login.sendPost();
+	//}
 }

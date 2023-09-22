@@ -15,15 +15,16 @@ package com.mary.spider;
  ****************************************************************************/
 
 /**
- * @author mary
+ * @author Mary Turpin
  *
  */
 public class Runner {	
 	/**
+	 * main method starts and runs retrieval class
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		Retrieval pages = new Retrieval();
-		pages.getWebPage("smt-stage.qa.siliconmtn.com", 443);
+		pages.getWebPage();
 	}
 }
