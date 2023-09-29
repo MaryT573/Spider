@@ -1,5 +1,7 @@
 package com.mary.spider;
 
+import java.io.IOException;
+
 /****************************************************************************
  * <b>Title:</b> Runner.java
  * <b>Project:</b> spider-lib
@@ -18,13 +20,26 @@ package com.mary.spider;
  * @author Mary Turpin
  *
  */
-public class Runner {	
+public class Spider {	
 	/**
 	 * main method starts and runs retrieval class
 	 * @param args
+	 * @throws  
 	 */
 	public static void main(String[] args) {
+		Spider crawler = new Spider();
+		crawler.run();
+	}
+	
+	public void run() {
 		Retrieval pages = new Retrieval();
 		pages.getWebPage();
+		Login login = new Login();
+		try {
+			login.sendPostStart();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

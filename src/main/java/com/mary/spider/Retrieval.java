@@ -34,7 +34,7 @@ public class Retrieval {
 	// establishes newLinks, clickedLinks, and route
 	HashSet<String> newLinks = new HashSet<>();
 	HashSet<String> clickedLinks = new HashSet<>();
-	String route = null;
+	String route = "";
 	String host = "smt-stage.qa.siliconmtn.com";
 	int portNumber = 443;
 	
@@ -60,7 +60,7 @@ public class Retrieval {
 			}	
 		}
 		//builds request
-		String request = "GET " + route + " HTTP/1.1\r\n" +
+		String request = "GET " + route + " HTTP/1.0\r\n" +
                 "Host: " + host + ":" + portNumber + "\r\n" +
                 "\r\n";
 		return request;
@@ -100,7 +100,7 @@ public class Retrieval {
 	public void printToFile(StringBuilder html) {
 		// determines filename
 		String filename = null;
-		if (route == "/") {
+		if (route.equals("/")) {
 			filename = "/home";
 		}
 		else {
@@ -118,8 +118,7 @@ public class Retrieval {
 	        //sends file to parseLinks method
 	        parseLinks(webPage);
 		} catch (IOException e) {
-			System.out.println("An error occurred.");
-		    e.printStackTrace();
+			System.out.println("An error occurred." + e);
 		}
 	}
 	
@@ -145,8 +144,6 @@ public class Retrieval {
 		if (newLinks.equals(clickedLinks)) {
 			System.out.println("Completed");
 			System.out.println("Starting Login...");
-			Login login = new Login();
-			login.sendPost();
 		}
 		//restarts cycle until all links in newLinks and clickedLinks are the same
 		else {

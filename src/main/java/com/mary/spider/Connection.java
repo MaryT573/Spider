@@ -53,7 +53,7 @@ public class Connection {
 		out.println();
 		out.flush();
 		
-		//System.out.println(request);
+		System.out.println(request);
 		//creates bufferedreader, inputstreamreader
 		BufferedReader in = new BufferedReader(
                 new InputStreamReader(
